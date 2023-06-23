@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 마이바티스에 시작하기 매핑 찾아보기 -->
+<mapper namespace="BoardMapper">
+  <select id="selectAll" resultType="org.comstudy.myweb.board.BoardDTO">
+    select * from Board order by num desc 
+  </select>
+  <select id="selectOne" resultType="org.comstudy.myweb.board.BoardDTO">
+    select * from Board where num= #{num}  
+  </select>
+  <!-- 마이바티스에 매핑.xml에서 insert, update and delete 제목 밑에 잇음. 복붙하는거에요.. -->
+  <insert id="insertBoard" parameterType="org.comstudy.myweb.board.BoardDTO">
+    insert into board(num, author, email, title, content, password)
+	values(board_seq.nextval, #{author}, #{email}, #{title}, #{content}, #{password})
+  </insert>
+  <update id="updateBoard" parameterType="org.comstudy.myweb.board.BoardDTO">
+  	update board set title = #{title}, content = #{content} where num = #{num}
+  </update>
+  <delete id="deleteBoard" parameterType="org.comstudy.myweb.board.BoardDTO">
+  	delete from board where num = #{num}
+  </delete>
+</mapper>
